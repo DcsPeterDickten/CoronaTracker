@@ -1,0 +1,110 @@
+<div>
+  Diese Webseite verwendet ausschließlich statistische Verfahren zur Prognose, alle Werte sind "geglättet" und weisen
+  daher geringfügige Abweichungen gegenüber den offiziellen Werte auf.
+
+  <p>
+    <select [(ngModel)]="COUNTRY" (ngModelChange)="updateData()">
+      <option *ngFor="let c of countries" [ngValue]="c.id">{{c.name}}</option>
+    </select>
+  </p>
+
+  <p *ngIf="isDataBroken()">
+    Die gelieferten Daten sind im Moment nicht zuverlässig.
+  </p>
+
+  <!-- <p *ngIf="COUNTRY === 'united-states'">
+    <b>Die Vergangenheitsdaten aus den USA sind im Moment leider defekt.</b>
+  </p> -->
+
+  <div *ngIf="graphData.length <= 3">
+    Keine ausreichenden Daten für eine Prognose vorhanden.
+  </div>
+
+  <div *ngIf="graphData.length > 3 && !isDataBroken()">
+
+    <p *ngIf="days !== 0">Prognose:<br />
+      <b>Nach dem aktuellen Verlauf dauert es noch ca. {{days}} Tage bis die Zahl der Erkrankten nahe 0 ist.<br />
+        Eine Verhaltensänderung in der Bevölkerung kann diese Prognose aber kurzfristig verändern</b>
+    </p>
+
+    <p *ngIf="!days">Prognose:
+      <b>Nach dem aktuellen Verlauf wird es kein Ende der Infektion geben, bis es einen Impfstoff gibt, 60-70%
+        der Bevölkerung erkrankt sind oder das Verhalten der Bevölkerung sich massiv ändert. </b>
+    </p>
+
+    <br />
+
+    <div style="width: 100%; height: 500px">
+      <ngx-charts-bar-vertical [results]="graphData" [gradient]="gradient" [xAxis]="showXAxis" [yAxis]="showYAxis"
+                               [legend]="showLegend" [showXAxisLabel]="showXAxisLabel" [showYAxisLabel]="showYAxisLabel"
+                               [xAxisLabel]="xAxisLabel" [yAxisLabel]="yAxisLabel">
+      </ngx-charts-bar-vertical>
+      <p></p>
+      <hr />
+    </div>
+  </div>
+
+  <br />
+
+  <div *ngIf="tableData.length>= 3&& !isDataBroken()">
+    Rohdaten (ungeglättet):
+
+    <table border=" 1" style="border-collapse: collapse;margin: 5px;padding: 5px;">
+
+      <tr style="background-color: #CCC;border-color: black">
+        <td style="padding: 5px;text-align: left" rowspan="2">Datum</td>
+        <td colspan="2" style="padding: 5px;text-align: center">Erkrankte</td>
+        <td colspan="2" style="padding: 5px;text-align: center">Verstorbene</td>
+      </tr>
+
+
+      <tr style="background-color: #CCC;border-color: black">
+        <td style="padding: 5px;text-align: right">Anzahl</td>
+        <td style="padding: 5px;text-align: right">Unterschied zum Vortag</td>
+        <td style="padding: 5px;text-align: right">Anzahl</td>
+        <td style="padding: 5px;text-align: right">Unterschied zum Vortag</td>
+      </tr>
+
+      <tr *ngFor="let x of tableData; let i = index"
+          style="background-color:  {{ tableData[i].diff > 0 ? 'red' : 'green' }}">
+        <td style="padding: 5px;text-align: right; color: white">
+          {{tableData[i].name}}
+        </td>
+        <td style="padding: 5px;text-align: right; color: white">
+          <span *ngIf="tableData[i].value > 0">
+            {{tableData[i].value | number:'':'de-DE'}}
+          </span>
+        </td>
+        <td style="padding: 5px;text-align: right; color: white">
+          <span *ngIf="tableData[i].diff !== 0">
+            {{tableData[i].diff | number:'':'de-DE'}}
+          </span>
+        </td>
+
+        <td style="padding: 5px;text-align: right; color: white">
+          <span *ngIf="!tableData[i].deaths">
+            -
+          </span>
+          <span *ngIf="tableData[i].deaths">
+            {{tableData[i].deaths | number:'':'de-DE'}}
+          </span>
+        </td>
+
+        <td style="padding: 5px;text-align: right; color: white">
+
+          <span *ngIf="tableData[i] && tableData[i+1]">
+            {{(tableData[i].deaths - tableData[i+1].deaths) | number:'':'de-DE' || '-'}}
+          </span>
+
+
+        </td>
+
+      </tr>
+    </table>
+  </div>
+</div>
+
+<hr />
+<p>Datenquellen:
+  https://www.covid19api.com und https://systems.jhu.edu
+</p>
