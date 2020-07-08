@@ -20,7 +20,10 @@
     Keine ausreichenden Daten für eine Prognose vorhanden.
   </div>
 
+  <app-cities *ngIf="COUNTRY === 'germany'"></app-cities>
+
   <div *ngIf="graphData.length > 3 && !isDataBroken()">
+
 
     <p *ngIf="days !== 0">Prognose:<br />
       <b>Nach dem aktuellen Verlauf dauert es noch ca. {{days}} Tage bis die Zahl der Erkrankten nahe 0 ist.<br />

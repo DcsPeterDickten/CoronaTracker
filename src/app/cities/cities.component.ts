@@ -1,0 +1,54 @@
+import { Component, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+
+@Component({
+  selector: 'app-cities',
+  templateUrl: './cities.component.html',
+  styleUrls: ['./cities.component.css']
+})
+export class CitiesComponent implements OnInit {
+
+
+  rawCityData = [];
+
+  constructor(private http: HttpClient) { }
+  ngOnInit(): void {
+    this.loadCityData();
+  }
+
+  loadCityData(): void {
+
+    const ID = Math.round(Math.random() * 100000000);
+
+    this.http.get('https://static.dwcdn.net/data/xB5Pf.csv?v=4247236497862139476129347861978234617892346',
+      { responseType: 'text' }).subscribe(
+        (data) => {
+          this.rawCityData = data.split('\r\n').map(zeile => zeile.split(',')).filter(this.isInterestingCity);
+        }
+      );
+  }
+
+  isInterestingCity(city: Array<string>): boolean {
+
+    const LIST_OF_CITIES = ['erlangen', 'coburg', 'bamberg', 'fürth', 'nürnberg', '/landkreis'];
+
+    let RESULT = false;
+
+    if (!city || !city.length) {
+      return false;
+    }
+
+    const NAME: string = (city[0] || '').toLocaleLowerCase();
+
+    LIST_OF_CITIES.forEach(c => {
+      if (NAME.indexOf(c) >= 0) {
+        RESULT = true;
+        return;
+      }
+    });
+
+    return RESULT;
+  }
+
+
+}
