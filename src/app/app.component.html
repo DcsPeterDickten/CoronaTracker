@@ -1,6 +1,6 @@
 <div>
-  Diese Webseite verwendet ausschließlich statistische Verfahren zur Prognose, alle Werte sind "geglättet" und weisen
-  daher geringfügige Abweichungen gegenüber den offiziellen Werte auf.
+  Diese Webseite verwendet ausschließlich statistische Verfahren zur Prognose, die Werte in der Graphik sind "geglättet"
+  und weisen daher geringfügige Abweichungen gegenüber den offiziellen Werte auf.
 
   <p>
     <select [(ngModel)]="COUNTRY" (ngModelChange)="updateData()">
@@ -8,22 +8,17 @@
     </select>
   </p>
 
-  <p *ngIf="isDataBroken()">
-    Die gelieferten Daten sind im Moment nicht zuverlässig.
-  </p>
+  <app-cities *ngIf="COUNTRY === 'germany'"></app-cities>
 
-  <!-- <p *ngIf="COUNTRY === 'united-states'">
-    <b>Die Vergangenheitsdaten aus den USA sind im Moment leider defekt.</b>
-  </p> -->
+  <p *ngIf="isDataBroken()">
+    Die gelieferten Länder-Daten sind im Moment leider unvollständig.
+  </p>
 
   <div *ngIf="graphData.length <= 3">
     Keine ausreichenden Daten für eine Prognose vorhanden.
   </div>
 
-  <app-cities *ngIf="COUNTRY === 'germany'"></app-cities>
-
   <div *ngIf="graphData.length > 3 && !isDataBroken()">
-
 
     <p *ngIf="days !== 0">Prognose:<br />
       <b>Nach dem aktuellen Verlauf dauert es noch ca. {{days}} Tage bis die Zahl der Erkrankten nahe 0 ist.<br />
@@ -49,10 +44,10 @@
 
   <br />
 
-  <div *ngIf="tableData.length>= 3&& !isDataBroken()">
+  <div *ngIf="tableData.length>= 3 && !isDataBroken()">
     Rohdaten (ungeglättet):
 
-    <table border=" 1" style="border-collapse: collapse;margin: 5px;padding: 5px;">
+    <table border="1" style="border-collapse: collapse;margin: 5px;padding: 5px;">
 
       <tr style="background-color: #CCC;border-color: black">
         <td style="padding: 5px;text-align: left" rowspan="2">Datum</td>
