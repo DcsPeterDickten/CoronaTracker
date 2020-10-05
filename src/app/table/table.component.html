@@ -1,55 +1,51 @@
-<div *ngIf="tableData.length>= 3">
-  Rohdaten (ungeglättet):
+<div class="content">
+  <h1>Rohdaten (ungeglättet):</h1>
+  <div class="table-wrapper" *ngIf="tableData.length >= 3">
+    <table class="table">
+      <tr>
+        <th rowspan="2">Datum</th>
+        <th colspan="2">Erkrankte</th>
+        <th colspan="2">Verstorbene</th>
+      </tr>
 
-  <table border="1" style="border-collapse: collapse;margin: 5px;padding: 5px;">
+      <tr>
+        <th>Anzahl</th>
+        <th>Unterschied zum Vortag</th>
+        <th>Anzahl</th>
+        <th>Unterschied zum Vortag</th>
+      </tr>
 
-    <tr style="background-color: #CCC;border-color: black">
-      <td style="padding: 5px;text-align: left" rowspan="2">Datum</td>
-      <td colspan="2" style="padding: 5px;text-align: center">Erkrankte</td>
-      <td colspan="2" style="padding: 5px;text-align: center">Verstorbene</td>
-    </tr>
+      <tr
+        *ngFor="let row of tableData; let i = index"
+        [style.background-color]="rowColor(row)"
+      >
+        <td>
+          {{ row.name }}
+        </td>
+        <td>
+          <span *ngIf="tableData[i].value > 0">
+            {{ row.value }}
+          </span>
+        </td>
+        <td>
+          <span *ngIf="tableData[i].diff !== 0">
+            {{ row.diff }}
+          </span>
+        </td>
 
+        <td>
+          <span *ngIf="!row.deaths"> - </span>
+          <span *ngIf="tableData[i].deaths">
+            {{ row.deaths }}
+          </span>
+        </td>
 
-    <tr style="background-color: #CCC;border-color: black">
-      <td style="padding: 5px;text-align: right">Anzahl</td>
-      <td style="padding: 5px;text-align: right">Unterschied zum Vortag</td>
-      <td style="padding: 5px;text-align: right">Anzahl</td>
-      <td style="padding: 5px;text-align: right">Unterschied zum Vortag</td>
-    </tr>
-
-    <tr *ngFor="let row of tableData; let i = index" [style.background-color]="rowColor(row)">
-
-      <td style="padding: 5px;text-align: right; color: white">
-        {{row.name}}
-      </td>
-      <td style="padding: 5px;text-align: right; color: white">
-        <span *ngIf="tableData[i].value > 0">
-          {{row.value}}
-        </span>
-      </td>
-      <td style="padding: 5px;text-align: right; color: white">
-        <span *ngIf="tableData[i].diff !== 0">
-          {{row.diff}}
-        </span>
-      </td>
-
-      <td style="padding: 5px;text-align: right; color: white">
-        <span *ngIf="!row.deaths">
-          -
-        </span>
-        <span *ngIf="tableData[i].deaths">
-          {{row.deaths}}
-        </span>
-      </td>
-
-      <td style="padding: 5px;text-align: right; color: white">
-
-        <span *ngIf="row && tableData[i+1]">
-          {{(row.deaths - tableData[i+1].deaths) || '-'}}
-        </span>
-
-
-      </td>
-
-    </tr>
-  </table>
+        <td>
+          <span *ngIf="row && tableData[i + 1]">
+            {{ row.deaths - tableData[i + 1].deaths || "-" }}
+          </span>
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>

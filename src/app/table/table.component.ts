@@ -3,15 +3,13 @@ import { Component, Input, OnInit } from '@angular/core';
 @Component({
   selector: 'app-table',
   templateUrl: './table.component.html',
-  styleUrls: ['./table.component.css']
+  styleUrls: ['./table.component.css'],
 })
 export class TableComponent {
-
   @Input()
-  public tableData: Array<any>
+  public tableData: Array<any>;
 
   rowColor(row: any) {
-    return row.diff > 0 ? 'red' : 'green';
+    return row.diff > 0 ? '#f25f5f' : '#7dda73';
   }
-
 }

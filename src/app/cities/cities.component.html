@@ -1,15 +1,20 @@
-<table border="1" style="border-collapse: collapse;margin: 5px;padding: 5px;">
-  <thead>
-    <tr>
-      <th>Stadt</th>
-      <th>&nbsp;7-Tage-Inzidenz&nbsp;</th>
-    </tr>
-  </thead>
+<div class="table-wrapper">
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Stadt</th>
+        <th>&nbsp;7-Tage-Inzidenz&nbsp;</th>
+      </tr>
+    </thead>
 
-  <tbody>
-    <tr *ngFor='let c of rawCityData' style="background-color: {{getColorForInzidenz(c[2])}}">
-      <td>{{c[0]}}</td>
-      <td align="right">{{c[2]}}</td>
-    </tr>
-  </tbody>
-</table>
+    <tbody>
+      <tr
+        *ngFor="let c of rawCityData"
+        style="background-color: {{ getColorForInzidenz(c[2]) }}"
+      >
+        <td>{{ c[0] }}</td>
+        <td>{{ c[2] }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

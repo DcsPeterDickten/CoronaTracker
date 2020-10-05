@@ -1,1 +1,121 @@
-/* You can add global styles to this file, and also import other style files */
+/* GLOBALS */
+.display-flex {
+  display: flex;
+}
+.justify-end {
+  justify-content: flex-end;
+}
+.justify-center {
+  justify-content: center;
+}
+label {
+  font-weight: bold;
+}
+select.form-control,
+select.form-control:focus,
+select.form-control:active {
+  background-color: #f6f6f6;
+}
+h1 {
+  font-size: 1.25rem;
+  font-weight: bold;
+}
+/* LAYOUT */
+.container.main {
+  padding-top: 4.5em;
+}
+/* HEADER */
+header {
+  background-color: #f27405;
+  display: flex;
+  color: #ffffff;
+  justify-content: center;
+  padding: 1em 0;
+  align-items: center;
+  align-content: center;
+  -webkit-box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.25);
+  -moz-box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.275);
+  box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.275);
+  position: fixed;
+  width: 100%;
+  z-index: 1000;
+}
+header .col-4 > h1 {
+  font-size: 1.25em;
+  margin-bottom: 0;
+}
+header .col-4 > a {
+  color: #ffffff;
+  text-decoration: none;
+  cursor: pointer;
+}
+header > .col-4 {
+  align-items: center;
+  align-content: center;
+}
+#logo {
+  width: 1.5em;
+  height: 1.5em;
+  margin-right: 0.5em;
+}
+
+/* CONTENT */
+.info {
+  border: 1px solid #ced4da;
+  border-radius: 0.5em;
+  padding: 1em;
+  text-align: center;
+  margin: 1.5em 0 1.5em 0;
+  background-color: #f6f6f6;
+}
+.info-text > p {
+  margin-bottom: 0;
+}
+.row.country-selector {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  margin: 2em 0 1.5em 0;
+}
+/* TABLES */
+.table-wrapper {
+  display: flex;
+  justify-content: center;
+}
+table.table {
+  border: 1px solid #ced4da;
+  font-size: 0.85em;
+}
+th {
+  border-right: 1px solid #ced4da;
+  background-color: #898989;
+  color: #ffffff;
+}
+td {
+  border-right: 1px solid #ced4da;
+}
+.content {
+  text-align: center;
+}
+.content > h1 {
+  margin-bottom: 1em;
+}
+footer {
+  background-color: #424242;
+  color: #ffffff;
+  display: flex;
+  justify-content: center;
+  padding: 1em 0;
+  align-items: center;
+  align-content: center;
+  margin-top: 2.5em;
+  text-align: center;
+}
+footer > p {
+  margin-bottom: 0;
+}
+footer > p > a {
+  color: #f27405 !important;
+  text-decoration: none;
+  cursor: pointer;
+}
