@@ -1,3 +1,4 @@
+<br />
 <div class="content">
   <h1>Rohdaten (ungeglättet):</h1>
   <div class="table-wrapper" *ngIf="tableData.length >= 3">
@@ -15,10 +16,7 @@
         <th>Unterschied zum Vortag</th>
       </tr>
 
-      <tr
-        *ngFor="let row of tableData; let i = index"
-        [style.background-color]="rowColor(row)"
-      >
+      <tr *ngFor="let row of tableData; let i = index" [style.background-color]="rowColor(row)">
         <td>
           {{ row.name }}
         </td>

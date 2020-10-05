@@ -1,0 +1,24 @@
+<p *ngIf="dataIsBroken">
+  Die gelieferten Länder-Daten sind im Moment leider unvollständig.
+</p>
+
+<div *ngIf="noOfRecords <= 3">
+  Keine ausreichenden Daten für eine Prognose vorhanden.
+</div>
+
+<div class="info" *ngIf="noOfRecords > 3 && !dataIsBroken">
+  <p class="info-text" *ngIf="daysUntilEndOfCrisis !== 0">
+    <strong>Prognose: </strong>
+    Nach dem aktuellen Verlauf dauert es noch ca. {{ daysUntilEndOfCrisis }} Tage bis die Zahl
+    der Erkrankten nahe 0 ist.<br />
+    Eine Verhaltensänderung in der Bevölkerung kann diese Prognose aber
+    kurzfristig verändern
+  </p>
+
+  <p class="info-text" *ngIf="!daysUntilEndOfCrisis">
+    <strong>Prognose: </strong>Nach dem aktuellen Verlauf wird es kein Ende
+    der Infektion geben, bis es einen Impfstoff gibt, 60-70% der Bevölkerung
+    erkrankt sind oder das Verhalten der Bevölkerung sich massiv ändert.
+  </p>
+
+</div>

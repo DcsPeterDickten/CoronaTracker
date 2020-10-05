@@ -1,11 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-chart',
   templateUrl: './chart.component.html',
   styleUrls: ['./chart.component.css']
 })
-export class ChartComponent implements OnInit {
+export class ChartComponent {
 
   showXAxis = true;
   showYAxis = true;
@@ -18,8 +18,4 @@ export class ChartComponent implements OnInit {
 
   @Input()
   data: any;
-
-  ngOnInit(): void {
-  }
-
 }

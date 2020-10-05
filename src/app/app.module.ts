@@ -8,13 +8,21 @@ import { FormsModule } from '@angular/forms';
 import { CitiesComponent } from './cities/cities.component';
 import { TableComponent } from './table/table.component';
 import { ChartComponent } from './chart/chart.component';
+import { PrognoseComponent } from './prognose/prognose.component';
+import { FooterComponent } from './footer/footer.component';
+import { HeaderComponent } from './header/header.component';
+import { DisclaimerComponent } from './disclaimer/disclaimer.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     CitiesComponent,
     TableComponent,
-    ChartComponent
+    ChartComponent,
+    PrognoseComponent,
+    FooterComponent,
+    HeaderComponent,
+    DisclaimerComponent
   ],
   imports: [
     BrowserModule, HttpClientModule, NgxChartsModule, BrowserAnimationsModule, FormsModule

@@ -43,7 +43,11 @@ export class AppComponent implements OnInit {
     this.loadInfectionData(this.COUNTRY);
   }
 
-  isDataBroken(): boolean {
+  hasEnoughData(): boolean {
+    return this.graphData.length > 3 && !this.isDataBroken();
+  }
+
+  private isDataBroken(): boolean {
     return this.tableData && this.tableData.length && this.tableData[0].deaths === 0;
   }
 
