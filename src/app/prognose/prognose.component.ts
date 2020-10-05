@@ -1,11 +1,11 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-prognose',
   templateUrl: './prognose.component.html',
   styleUrls: ['./prognose.component.css']
 })
-export class PrognoseComponent implements OnInit {
+export class PrognoseComponent {
 
   @Input()
   dataIsBroken: boolean = false;
@@ -15,8 +15,5 @@ export class PrognoseComponent implements OnInit {
 
   @Input()
   daysUntilEndOfCrisis: number = 0;
-
-  ngOnInit(): void {
-  }
 
 }

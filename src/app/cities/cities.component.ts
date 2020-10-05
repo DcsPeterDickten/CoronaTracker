@@ -9,7 +9,8 @@ import { HttpClient } from '@angular/common/http';
 export class CitiesComponent implements OnInit {
   rawCityData = [];
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
+
   ngOnInit(): void {
     this.loadCityData();
   }
@@ -48,9 +49,7 @@ export class CitiesComponent implements OnInit {
       'fürth',
       'nürnberg',
       '/landkreis',
-      'münchen',
-      'würzburg',
-    ];
+      'münchen'];
 
     let RESULT = false;
 
