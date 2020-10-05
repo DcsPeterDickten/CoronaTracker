@@ -5,25 +5,19 @@ import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { FormsModule } from '@angular/forms';
-import { registerLocaleData } from '@angular/common';
-import localeDe from '@angular/common/locales/de';
-import localeDeExtra from '@angular/common/locales/extra/de';
 import { CitiesComponent } from './cities/cities.component';
-
-registerLocaleData(localeDe, 'de-DE', localeDeExtra);
-
+import { TableComponent } from './table/table.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    CitiesComponent
+    CitiesComponent,
+    TableComponent
   ],
   imports: [
     BrowserModule, HttpClientModule, NgxChartsModule, BrowserAnimationsModule, FormsModule
   ],
-  providers: [
-    { provide: LOCALE_ID, useValue: 'de-DE' }
-  ],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule {

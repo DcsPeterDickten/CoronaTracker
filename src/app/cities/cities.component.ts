@@ -28,14 +28,29 @@ export class CitiesComponent implements OnInit {
       );
   }
 
+
+  getColorForInzidenz(i: number) {
+    if (+i < 35) {
+      return 'white';
+    }
+    if (+i < 50) {
+      return 'yellow';
+    }
+    return 'red';
+  }
+
   isInterestingCity(city: Array<string>): boolean {
 
-    const LIST_OF_CITIES = ['erlangen', 'coburg', 'bamberg', 'fürth', 'nürnberg', '/landkreis'];
+    const LIST_OF_CITIES = ['erlangen', 'coburg', 'bamberg', 'fürth', 'nürnberg', '/landkreis', 'münchen', 'würzburg'];
 
     let RESULT = false;
 
     if (!city || !city.length) {
       return false;
+    }
+
+    if (+city[2] >= 30) {
+      return true;
     }
 
     const NAME: string = (city[0] || '').toLocaleLowerCase();
