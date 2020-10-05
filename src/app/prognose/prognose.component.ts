@@ -2,8 +2,7 @@ import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-prognose',
-  templateUrl: './prognose.component.html',
-  styleUrls: ['./prognose.component.css']
+  templateUrl: './prognose.component.html'
 })
 export class PrognoseComponent {
 

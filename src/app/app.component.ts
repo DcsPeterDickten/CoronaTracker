@@ -8,8 +8,7 @@ const COUNTRIES = [{ id: 'afghanistan', name: 'Afghanistan' }, { id: 'ala-aland-
 
 @Component({
   selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  templateUrl: './app.component.html'
 })
 export class AppComponent implements OnInit {
 

@@ -3,8 +3,7 @@ import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-cities',
-  templateUrl: './cities.component.html',
-  styleUrls: ['./cities.component.css'],
+  templateUrl: './cities.component.html'
 })
 export class CitiesComponent implements OnInit {
   rawCityData = [];
