@@ -26,7 +26,7 @@ h1 {
 }
 /* HEADER */
 header {
-  background-color: #f27405;
+  background-color: rgba(15, 78, 129, 1);
   display: flex;
   color: #ffffff;
   justify-content: center;
@@ -115,7 +115,7 @@ footer > p {
   margin-bottom: 0;
 }
 footer > p > a {
-  color: #f27405 !important;
+  color: #366aff !important;
   text-decoration: none;
   cursor: pointer;
 }
