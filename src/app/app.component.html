@@ -21,7 +21,7 @@
   </app-prognose>
 
   <app-chart [data]="graphData" *ngIf="hasEnoughData()"></app-chart>
-  <app-table [tableData]="tableData" *ngIf="hasEnoughData()"> </app-table>
+  <app-table [tableData]="tableData.slice(0,50)" *ngIf="hasEnoughData()"> </app-table>
 
 </div>
 
