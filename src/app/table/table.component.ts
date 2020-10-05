@@ -1,4 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { RowData } from '../row-data';
 
 @Component({
   selector: 'app-table',
@@ -7,7 +8,7 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class TableComponent {
   @Input()
-  public tableData: Array<any>;
+  public tableData: Array<RowData>;
 
   rowColor(row: any) {
     return row.diff > 0 ? '#f25f5f' : '#7dda73';

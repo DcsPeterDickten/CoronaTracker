@@ -20,9 +20,10 @@
   <app-prognose [dataIsBroken]="!hasEnoughData()" [noOfRecords]="graphData.length" [daysUntilEndOfCrisis]="days">
   </app-prognose>
 
+  <app-chart [data]="graphData" *ngIf="hasEnoughData()"></app-chart>
+  <app-table [tableData]="tableData" *ngIf="hasEnoughData()"> </app-table>
+
 </div>
 
-<app-chart [data]="graphData" *ngIf="hasEnoughData()"></app-chart>
-<app-table [tableData]="tableData" *ngIf="hasEnoughData()"> </app-table>
 
 <app-footer></app-footer>
