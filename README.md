@@ -13,3 +13,5 @@ ng serve
 ```
 ng build --prod
 ```
+
+Wir freuen uns über Pull-Requests!
