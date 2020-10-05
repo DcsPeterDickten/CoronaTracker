@@ -7,12 +7,14 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { FormsModule } from '@angular/forms';
 import { CitiesComponent } from './cities/cities.component';
 import { TableComponent } from './table/table.component';
+import { ChartComponent } from './chart/chart.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     CitiesComponent,
-    TableComponent
+    TableComponent,
+    ChartComponent
   ],
   imports: [
     BrowserModule, HttpClientModule, NgxChartsModule, BrowserAnimationsModule, FormsModule
