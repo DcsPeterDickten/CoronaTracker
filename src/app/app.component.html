@@ -62,13 +62,11 @@
 
   <div class="info" *ngIf="graphData.length > 3 && !isDataBroken()">
     <p class="info-text" *ngIf="days !== 0">
-      Prognose:<br />
-      <b
-        >Nach dem aktuellen Verlauf dauert es noch ca. {{ days }} Tage bis die
-        Zahl der Erkrankten nahe 0 ist.<br />
-        Eine Verhaltensänderung in der Bevölkerung kann diese Prognose aber
-        kurzfristig verändern</b
-      >
+      <strong>Prognose: </strong>
+      Nach dem aktuellen Verlauf dauert es noch ca. {{ days }} Tage bis die Zahl
+      der Erkrankten nahe 0 ist.<br />
+      Eine Verhaltensänderung in der Bevölkerung kann diese Prognose aber
+      kurzfristig verändern
     </p>
 
     <p class="info-text" *ngIf="!days">
