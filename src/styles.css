@@ -1,4 +1,14 @@
+/************************/
+/************************/
 /* GLOBALS */
+/************************/
+h1 {
+  font-size: 1.25rem;
+  font-weight: bold;
+}
+/************************/
+/* HELPER */
+/************************/
 .display-flex {
   display: flex;
 }
@@ -8,23 +18,15 @@
 .justify-center {
   justify-content: center;
 }
-label {
-  font-weight: bold;
-}
-select.form-control,
-select.form-control:focus,
-select.form-control:active {
-  background-color: #f6f6f6;
-}
-h1 {
-  font-size: 1.25rem;
-  font-weight: bold;
-}
+/************************/
 /* LAYOUT */
+/************************/
 .container.main {
   padding-top: 4.5em;
 }
+/************************/
 /* HEADER */
+/************************/
 header {
   background-color: rgba(15, 78, 129, 1);
   display: flex;
@@ -58,8 +60,15 @@ header > .col-4 {
   height: 1.5em;
   margin-right: 0.5em;
 }
-
+/************************/
 /* CONTENT */
+/************************/
+.content {
+  text-align: center;
+}
+.content > h1 {
+  margin-bottom: 1em;
+}
 .info {
   border: 1px solid #ced4da;
   border-radius: 0.5em;
@@ -71,13 +80,26 @@ header > .col-4 {
 .info-text > p {
   margin-bottom: 0;
 }
+/************************/
+/* FORMS */
+/************************/
+label {
+  font-weight: bold;
+}
+select.form-control,
+select.form-control:focus,
+select.form-control:active {
+  background-color: #f6f6f6;
+}
 .row.country-selector {
   display: flex;
   justify-content: center;
   text-align: center;
   margin: 2em 0 1.5em 0;
 }
+/************************/
 /* TABLES */
+/************************/
 .table-wrapper {
   display: flex;
   justify-content: center;
@@ -85,6 +107,7 @@ header > .col-4 {
 table.table {
   border: 1px solid #ced4da;
   font-size: 0.85em;
+  max-width: 100%;
 }
 th {
   border-right: 1px solid #ced4da;
@@ -94,12 +117,9 @@ th {
 td {
   border-right: 1px solid #ced4da;
 }
-.content {
-  text-align: center;
-}
-.content > h1 {
-  margin-bottom: 1em;
-}
+/************************/
+/* FOOTER */
+/************************/
 footer {
   background-color: #424242;
   color: #ffffff;
@@ -118,4 +138,19 @@ footer > p > a {
   color: #366aff !important;
   text-decoration: none;
   cursor: pointer;
+}
+/************************/
+/************************/
+/* MOBILE */
+/************************/
+@media (max-width: 645px) {
+  header .col-4 > h1 {
+    font-size: 0.9em;
+  }
+  header .col-4 > a {
+    font-size: 0.9em;
+  }
+  #logo {
+    display: none;
+  }
 }
