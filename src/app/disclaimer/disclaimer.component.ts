@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-disclaimer',
+  selector: 'corona-disclaimer',
   templateUrl: './disclaimer.component.html'
 })
 export class DisclaimerComponent { }

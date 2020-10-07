@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
 
 @Component({
-  selector: 'app-cities',
+  selector: 'corona-cities',
   templateUrl: './cities.component.html'
 })
 export class CitiesComponent implements OnInit {
@@ -18,10 +19,7 @@ export class CitiesComponent implements OnInit {
     const ID = Math.round(Math.random() * 100000000);
 
     this.http
-      .get(
-        'https://static.dwcdn.net/data/xB5Pf.csv?v=4247236497862139476129347861978234617892346',
-        { responseType: 'text' }
-      )
+      .get(environment.CITY_URL, { responseType: 'text' })
       .subscribe((data) => {
         this.rawCityData = data
           .split('\r\n')

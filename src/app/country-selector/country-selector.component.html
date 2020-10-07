@@ -1,0 +1,10 @@
+<div class="row country-selector">
+  <div class="form-group col-6">
+    <label>Wählen Sie ein Land:</label>
+    <select [(ngModel)]="currentCountry" (ngModelChange)="countrySelected($event)" class="form-control">
+      <option *ngFor="let c of allCountries" [ngValue]="c.id">
+        {{ c.name }}
+      </option>
+    </select>
+  </div>
+</div>

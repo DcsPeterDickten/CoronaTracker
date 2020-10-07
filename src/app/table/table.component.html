@@ -22,25 +22,25 @@
         </td>
         <td>
           <span *ngIf="tableData[i].value > 0">
-            {{ row.value }}
+            {{ row.value | number:'':'de-DE' }}
           </span>
         </td>
         <td>
           <span *ngIf="tableData[i].diff !== 0">
-            {{ row.diff }}
+            {{ row.diff | number:'':'de-DE' }}
           </span>
         </td>
 
         <td>
           <span *ngIf="!row.deaths"> - </span>
           <span *ngIf="tableData[i].deaths">
-            {{ row.deaths }}
+            {{ row.deaths | number:'':'de-DE'}}
           </span>
         </td>
 
         <td>
           <span *ngIf="row && tableData[i + 1]">
-            {{ row.deaths - tableData[i + 1].deaths || "-" }}
+            {{ (row.deaths - tableData[i + 1].deaths) || "-" }}
           </span>
         </td>
       </tr>

@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 
 @Component({
-  selector: 'app-chart',
+  selector: 'corona-chart',
   templateUrl: './chart.component.html'
 })
 export class ChartComponent {

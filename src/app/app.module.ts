@@ -12,6 +12,14 @@ import { PrognoseComponent } from './prognose/prognose.component';
 import { FooterComponent } from './footer/footer.component';
 import { HeaderComponent } from './header/header.component';
 import { DisclaimerComponent } from './disclaimer/disclaimer.component';
+import { CountrySelectorComponent } from './country-selector/country-selector.component';
+import { CommonModule } from '@angular/common';
+import { registerLocaleData } from '@angular/common';
+import localeDe from '@angular/common/locales/de';
+import localeDeExtra from '@angular/common/locales/extra/de';
+
+registerLocaleData(localeDe, 'de-DE', localeDeExtra);
+
 
 @NgModule({
   declarations: [
@@ -22,15 +30,16 @@ import { DisclaimerComponent } from './disclaimer/disclaimer.component';
     PrognoseComponent,
     FooterComponent,
     HeaderComponent,
-    DisclaimerComponent
+    DisclaimerComponent,
+    CountrySelectorComponent
   ],
   imports: [
-    BrowserModule, HttpClientModule, NgxChartsModule, BrowserAnimationsModule, FormsModule
+    BrowserModule, HttpClientModule, CommonModule, NgxChartsModule, BrowserAnimationsModule, FormsModule
   ],
-  providers: [],
+  providers: [
+    { provide: LOCALE_ID, useValue: 'de-de' },
+  ],
   bootstrap: [AppComponent]
 })
-export class AppModule {
+export class AppModule { }
 
-
-}

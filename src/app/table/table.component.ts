@@ -1,8 +1,8 @@
 import { Component, Input } from '@angular/core';
-import { RowData } from '../row-data';
+import { RowData } from '../row-data.interface';
 
 @Component({
-  selector: 'app-table',
+  selector: 'corona-table',
   templateUrl: './table.component.html'
 })
 export class TableComponent {

@@ -1,29 +1,38 @@
-<app-header></app-header>
+<corona-header>
+</corona-header>
 
 <div class="container main">
 
-  <app-disclaimer></app-disclaimer>
+  <corona-disclaimer>
+  </corona-disclaimer>
 
-  <div class="row country-selector">
+  <!-- <div class="row country-selector">
     <div class="form-group col-6">
       <label>Wählen Sie ein Land:</label>
-      <select [(ngModel)]="COUNTRY" (ngModelChange)="updateData()" class="form-control">
+      <select [(ngModel)]="selectedCountry" (ngModelChange)="updateData()" class="form-control">
         <option *ngFor="let c of countries" [ngValue]="c.id">
           {{ c.name }}
         </option>
       </select>
     </div>
-  </div>
+  </div> -->
 
-  <app-cities *ngIf="COUNTRY === 'germany'"></app-cities>
+  <corona-country-selector [allCountries]="countries" (selectedNewCountry)="selected($event)">
+  </corona-country-selector>
 
-  <app-prognose [dataIsBroken]="!hasEnoughData()" [noOfRecords]="graphData.length" [daysUntilEndOfCrisis]="days">
-  </app-prognose>
+  <corona-cities *ngIf="selectedCountry === 'germany'">
+  </corona-cities>
 
-  <app-chart [data]="graphData" *ngIf="hasEnoughData()"></app-chart>
-  <app-table [tableData]="tableData.slice(0,50)" *ngIf="hasEnoughData()"> </app-table>
+  <corona-prognose [dataIsBroken]="!hasEnoughData()" [noOfRecords]="graphData.length" [daysUntilEndOfCrisis]="days">
+  </corona-prognose>
+
+  <corona-chart [data]="graphData" *ngIf="hasEnoughData()">
+  </corona-chart>
+
+  <corona-table [tableData]="tableData.slice(0,50)" *ngIf="hasEnoughData()">
+  </corona-table>
 
 </div>
 
-
-<app-footer></app-footer>
+<corona-footer>
+</corona-footer>
