@@ -16,31 +16,32 @@
         <th>Unterschied zum Vortag</th>
       </tr>
 
-      <tr *ngFor="let row of tableData; let i = index" [style.background-color]="rowColor(row)">
+      <tr *ngFor="let row of tableData" [style.background-color]="rowColor(row)">
         <td>
           {{ row.name }}
         </td>
         <td>
-          <span *ngIf="tableData[i].value > 0">
+          <span *ngIf="row.value > 0">
             {{ row.value | number:'':'de-DE' }}
           </span>
         </td>
         <td>
-          <span *ngIf="tableData[i].diff !== 0">
+          <span *ngIf="row.diff !== 0">
             {{ row.diff | number:'':'de-DE' }}
           </span>
         </td>
 
         <td>
           <span *ngIf="!row.deaths"> - </span>
-          <span *ngIf="tableData[i].deaths">
+          <span *ngIf="row.deaths">
             {{ row.deaths | number:'':'de-DE'}}
           </span>
         </td>
 
         <td>
-          <span *ngIf="row && tableData[i + 1]">
-            {{ (row.deaths - tableData[i + 1].deaths) || "-" }}
+          <span *ngIf="!row.diffDeaths"> - </span>
+          <span *ngIf="row.diffDeaths">
+            {{ row.diffDeaths | number:'':'de-DE'}}
           </span>
         </td>
       </tr>

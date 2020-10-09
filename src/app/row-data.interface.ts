@@ -3,4 +3,5 @@ export interface RowData {
   value: number;
   diff: number;
   deaths: number;
+  diffDeaths?: number;
 }

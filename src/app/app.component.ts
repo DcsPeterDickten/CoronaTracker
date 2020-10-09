@@ -92,7 +92,13 @@ export class AppComponent implements OnInit {
       return false;
     }
 
+    // an diesem Tag sind die Daten in der Quelle kaputt
     if (e.Date && e.Date.indexOf('2020-07-08T') === 0) {
+      return false;
+    }
+
+    // remove corrupt data from Canada
+    if (this.selectedCountry === 'canada' && e.Date && e.Date < '2020-07-21') {
       return false;
     }
 
@@ -119,8 +125,10 @@ export class AppComponent implements OnInit {
     const result = [];
     rawData.forEach((eintrag, index) => {
       const anzahl = Math.max(0, eintrag.anzahl);
+      const deaths = eintrag.deaths;
       const diff = index === 0 ? anzahl : anzahl - Math.max(0, result[index - 1].value);
-      result.push({ name: eintrag.datum, value: anzahl, diff, deaths: eintrag.deaths });
+      const diffDeaths = index === 0 ? deaths : deaths - Math.max(0, result[index - 1].deaths);
+      result.push({ name: eintrag.datum, value: anzahl, diff, deaths: eintrag.deaths, diffDeaths });
     });
     return result;
   }
