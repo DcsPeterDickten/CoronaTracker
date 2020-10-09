@@ -110,7 +110,7 @@ export class AppComponent implements OnInit {
       const amRand = (index === 0 || index === rawData.length - 1);
       const anzahl = Math.round(amRand ? eintrag.anzahl : (rawData[index - 1].anzahl + rawData[index].anzahl + rawData[index + 1].anzahl) / 3);
       const diff = index === 0 ? anzahl : anzahl - result[index - 1].value;
-      result.push({ name: eintrag.datum, value: anzahl, diff });
+      result.push({ name: eintrag.datum, value: Math.max(0, anzahl), diff });
     });
     return result;
   }
@@ -118,8 +118,8 @@ export class AppComponent implements OnInit {
   private convertRaw(rawData: Array<any>): Array<any> {
     const result = [];
     rawData.forEach((eintrag, index) => {
-      const anzahl = eintrag.anzahl;
-      const diff = index === 0 ? anzahl : anzahl - result[index - 1].value;
+      const anzahl = Math.max(0, eintrag.anzahl);
+      const diff = index === 0 ? anzahl : anzahl - Math.max(0, result[index - 1].value);
       result.push({ name: eintrag.datum, value: anzahl, diff, deaths: eintrag.deaths });
     });
     return result;

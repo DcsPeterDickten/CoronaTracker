@@ -6,17 +6,6 @@
   <corona-disclaimer>
   </corona-disclaimer>
 
-  <!-- <div class="row country-selector">
-    <div class="form-group col-6">
-      <label>Wählen Sie ein Land:</label>
-      <select [(ngModel)]="selectedCountry" (ngModelChange)="updateData()" class="form-control">
-        <option *ngFor="let c of countries" [ngValue]="c.id">
-          {{ c.name }}
-        </option>
-      </select>
-    </div>
-  </div> -->
-
   <corona-country-selector [allCountries]="countries" (selectedNewCountry)="selected($event)">
   </corona-country-selector>
 
