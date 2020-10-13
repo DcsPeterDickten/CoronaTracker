@@ -1,10 +1,10 @@
 // tslint:disable: max-line-length
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { RowData } from './row-data.interface';
 import { environment } from 'src/environments/environment';
 import { Country } from './country.interface';
-import { of } from 'rxjs';
+import { CountryDataService } from './country-data.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'corona-root',
@@ -12,28 +12,40 @@ import { of } from 'rxjs';
 })
 export class AppComponent implements OnInit {
 
-  constructor(private http: HttpClient) { }
+  constructor(private countryDataService: CountryDataService, private activatedRoute: ActivatedRoute) { }
 
-  private cache = {};
-
-  selectedCountry = 'germany';
+  selectedCountry = '';
   graphData = [];
   tableData: Array<RowData> = [];
   countries: Array<Country> = environment.COUNTRIES;
   days = 0;
-
   private averageDecline = 0;
 
+  // ===========================================================================================
+
   ngOnInit(): void {
-    this.loadInfectionData();
+    this.activatedRoute.queryParams.subscribe(
+      (params) => {
+        this.selected(params['c']);
+      });
   }
+
+  // ===========================================================================================
+
+  isValidCountryID(countryId: string) {
+    return countryId && environment.COUNTRIES.map(c => c.id).find(cid => cid === countryId);
+  }
+
+  // ===========================================================================================
 
   hasEnoughData(): boolean {
     return this.graphData.length > 3 && !this.isDataBroken();
   }
 
-  selected(newCountry) {
-    this.selectedCountry = newCountry;
+  // ===========================================================================================
+
+  selected(countryId) {
+    this.selectedCountry = (this.isValidCountryID(countryId)) ? countryId : 'germany';
     this.loadInfectionData();
   }
 
@@ -43,22 +55,19 @@ export class AppComponent implements OnInit {
     return this.tableData && this.tableData.length && this.tableData[0].deaths === 0;
   }
 
+  // ===========================================================================================
+
   private loadInfectionData() {
-    const country = this.selectedCountry || 'germany';
 
-    let observer = null
+    let observer = this.countryDataService.getCountryData(this.selectedCountry);
 
-    if (this.cache[country]) {
-      observer = of(this.cache[country]);
-    } else {
-      observer = this.http.get<Array<any>>(environment.URL + country);
-    }
     observer.subscribe(
       (data) => {
-        this.cache[country] = data;
-        let rawData = data.filter(this.filterInfectionData).map(this.convertInfectionData);
-        this.graphData = this.glaetten(rawData);
-        rawData = this.convertRaw(rawData);
+        this.countryDataService.writeCache(this.selectedCountry, data);
+        let rawData = this.getRawData(data);
+        this.graphData = this.getGraphData(rawData);
+        this.tableData = this.getTableData(rawData);
+
         this.averageDecline = 0;
         this.days = 0;
         const anzahlTage = this.graphData.length;
@@ -68,14 +77,43 @@ export class AppComponent implements OnInit {
             this.days = Math.round(this.graphData[anzahlTage - 1].value / Math.abs(this.averageDecline));
           }
         }
-        this.tableData = this.cleanupList(rawData.slice().reverse());
       }
     );
   }
 
+  // ===========================================================================================
+
+  private getTableData(data) {
+    const rawData = this.convertRaw(data);
+    return this.cleanupList(rawData.slice().reverse());
+  }
+
+  // ===========================================================================================
+
+  private getRawData(data) {
+    return data.filter(this.filterInfectionData).map(this.convertInfectionData);
+  }
+
+  // ===========================================================================================
+
+  private getGraphData(rawData: Array<any>): Array<any> {
+    const result = [];
+    rawData.forEach((eintrag, index) => {
+      const amRand = (index === 0 || index === rawData.length - 1);
+      const anzahl = Math.round(amRand ? eintrag.anzahl : (rawData[index - 1].anzahl + rawData[index].anzahl + rawData[index + 1].anzahl) / 3);
+      const diff = index === 0 ? anzahl : anzahl - result[index - 1].value;
+      result.push({ name: eintrag.datum, value: Math.max(0, anzahl), diff });
+    });
+    return result;
+  }
+
+  // ===========================================================================================
+
   private cleanupList(list: Array<any>): Array<RowData> {
     return list.filter(this.hasData);
   }
+
+  // ===========================================================================================
 
   private convertInfectionData = (e: any): any => {
     return {
@@ -84,6 +122,8 @@ export class AppComponent implements OnInit {
       deaths: e.Deaths
     };
   }
+
+  // ===========================================================================================
 
   private filterInfectionData = (e: any): boolean => {
 
@@ -106,20 +146,13 @@ export class AppComponent implements OnInit {
     return !!(e.Active || e.Deaths);
   }
 
+  // ===========================================================================================
+
   private extractDate(d: string): string {
     return d.substr(0, d.indexOf('T'));
   }
 
-  private glaetten(rawData: Array<any>): Array<any> {
-    const result = [];
-    rawData.forEach((eintrag, index) => {
-      const amRand = (index === 0 || index === rawData.length - 1);
-      const anzahl = Math.round(amRand ? eintrag.anzahl : (rawData[index - 1].anzahl + rawData[index].anzahl + rawData[index + 1].anzahl) / 3);
-      const diff = index === 0 ? anzahl : anzahl - result[index - 1].value;
-      result.push({ name: eintrag.datum, value: Math.max(0, anzahl), diff });
-    });
-    return result;
-  }
+  // ===========================================================================================
 
   private convertRaw(rawData: Array<any>): Array<any> {
     const result = [];
@@ -133,7 +166,10 @@ export class AppComponent implements OnInit {
     return result;
   }
 
+  // ===========================================================================================
+
   private hasData(eintrag: RowData): boolean {
     return (eintrag.diff !== 0 || eintrag.deaths !== 0);
   }
+
 }

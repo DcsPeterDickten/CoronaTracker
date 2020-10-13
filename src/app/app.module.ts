@@ -17,6 +17,8 @@ import { CommonModule } from '@angular/common';
 import { registerLocaleData } from '@angular/common';
 import localeDe from '@angular/common/locales/de';
 import localeDeExtra from '@angular/common/locales/extra/de';
+import { CountryDataService } from './country-data.service';
+import { RouterModule } from '@angular/router';
 
 registerLocaleData(localeDe, 'de-DE', localeDeExtra);
 
@@ -34,10 +36,12 @@ registerLocaleData(localeDe, 'de-DE', localeDeExtra);
     CountrySelectorComponent
   ],
   imports: [
-    BrowserModule, HttpClientModule, CommonModule, NgxChartsModule, BrowserAnimationsModule, FormsModule
+    BrowserModule, HttpClientModule, CommonModule, NgxChartsModule, BrowserAnimationsModule, FormsModule,
+    RouterModule.forRoot([]),
   ],
   providers: [
     { provide: LOCALE_ID, useValue: 'de-de' },
+    CountryDataService
   ],
   bootstrap: [AppComponent]
 })
