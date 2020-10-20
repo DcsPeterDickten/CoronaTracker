@@ -39,10 +39,14 @@ export class CitiesComponent implements OnInit {
   }
 
   isInterestingCity(city: Array<string>): boolean {
+
+    console.log({ city });
+
     const LIST_OF_CITIES = [
       'erlangen',
       'coburg',
       'bamberg',
+      'donau-ries',
       'fürth',
       'nürnberg',
       '/landkreis',
