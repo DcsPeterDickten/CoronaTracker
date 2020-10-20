@@ -3,7 +3,7 @@ describe("My First Test", () => {
     cy.visit("http://localhost:4200");
 
     cy.contains("Corona-Tracker");
-    cy.contains("Fürth (Stadt)");
+    // cy.contains("Fürth (Stadt)"); // Ist nicht immer vorhanden
     cy.contains("Ungeglättete Rohdaten der letzten 50 Tage:");
   });
 });
