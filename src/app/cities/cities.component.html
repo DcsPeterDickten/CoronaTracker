@@ -8,13 +8,14 @@
     </thead>
 
     <tbody>
-      <tr
-        *ngFor="let c of rawCityData"
-        style="background-color: {{ getColorForInzidenz(c[2]) }}"
-      >
+      <tr *ngFor="let c of rawCityData" style="background-color: {{ getColorForInzidenz(c[2]) }}">
         <td>{{ c[0] }}</td>
         <td>{{ c[2] }}</td>
       </tr>
     </tbody>
   </table>
+</div>
+
+<div *ngIf="!rawCityData?.length">
+  Leider liefert die bayerische Datenquellen im Moment keine Stadtinformationen.
 </div>
