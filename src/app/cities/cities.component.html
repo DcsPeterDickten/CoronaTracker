@@ -8,7 +8,7 @@
     </thead>
 
     <tbody>
-      <tr *ngFor="let c of rawCityData" style="background-color: {{ getColorForInzidenz(c[2]) }}">
+      <tr *ngFor="let c of rawCityData" class="{{getClassForInzidenz(c[2])}}">
         <td>{{ c[0] }}</td>
         <td>{{ c[2] }}</td>
       </tr>

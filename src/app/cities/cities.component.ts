@@ -4,7 +4,8 @@ import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'corona-cities',
-  templateUrl: './cities.component.html'
+  templateUrl: './cities.component.html',
+  styleUrls: ['./cities.component.css']
 })
 export class CitiesComponent implements OnInit {
   rawCityData = [];
@@ -28,19 +29,24 @@ export class CitiesComponent implements OnInit {
       });
   }
 
-  getColorForInzidenz(i: number) {
-    if (+i < 35) {
-      return 'white';
+  getClassForInzidenz(inzidenz: number) {
+    if (+inzidenz < 35) {
+      return 'below35';
     }
-    if (+i < 50) {
-      return '#f3e677';
-    }
-
-    if (+i < 100) {
-      return '#f25f5f';
+    if (+inzidenz < 50) {
+      return 'below50';
     }
 
-    return '#8b0000';
+    if (+inzidenz < 100) {
+      return 'below100';
+    }
+
+    if (+inzidenz < 200) {
+      return 'below200';
+    }
+
+    return 'above200';
+
   }
 
   isInterestingCity(city: Array<string>): boolean {
