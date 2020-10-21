@@ -35,7 +35,12 @@ export class CitiesComponent implements OnInit {
     if (+i < 50) {
       return '#f3e677';
     }
-    return '#f25f5f';
+
+    if (+i < 100) {
+      return '#f25f5f';
+    }
+
+    return '#8b0000';
   }
 
   isInterestingCity(city: Array<string>): boolean {
