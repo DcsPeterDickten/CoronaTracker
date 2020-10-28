@@ -18,7 +18,7 @@
 
       <tr *ngFor="let row of tableData" [style.background-color]="rowColor(row)">
         <td>
-          {{ row.name }}
+          {{ row.date | date:'dd.MM.yyyy' }}
         </td>
         <td>
           <span *ngIf="row.value > 0">

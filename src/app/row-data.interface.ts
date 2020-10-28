@@ -1,5 +1,5 @@
 export interface RowData {
-  name: string;
+  date: string;
   value: number;
   diff: number;
   deaths: number;

@@ -5,6 +5,7 @@ import { environment } from 'src/environments/environment';
 import { Country } from './country.interface';
 import { CountryDataService } from './country-data.service';
 import { ActivatedRoute } from '@angular/router';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'corona-root',
@@ -98,11 +99,18 @@ export class AppComponent implements OnInit {
 
   private getGraphData(rawData: Array<any>): Array<any> {
     const result = [];
+    const dp: DatePipe = new DatePipe('de-de');
+    dp.transform('')
+
     rawData.forEach((eintrag, index) => {
       const amRand = (index === 0 || index === rawData.length - 1);
       const anzahl = Math.round(amRand ? eintrag.anzahl : (rawData[index - 1].anzahl + rawData[index].anzahl + rawData[index + 1].anzahl) / 3);
       const diff = index === 0 ? anzahl : anzahl - result[index - 1].value;
-      result.push({ name: eintrag.datum, value: Math.max(0, anzahl), diff });
+      result.push({
+        // name: eintrag.datum,
+        name: dp.transform(eintrag.datum, 'dd.MM.yyyy'),
+        value: Math.max(0, anzahl), diff
+      });
     });
     return result;
   }
@@ -161,7 +169,7 @@ export class AppComponent implements OnInit {
       const deaths = eintrag.deaths;
       const diff = index === 0 ? anzahl : anzahl - Math.max(0, result[index - 1].value);
       const diffDeaths = index === 0 ? deaths : deaths - Math.max(0, result[index - 1].deaths);
-      result.push({ name: eintrag.datum, value: anzahl, diff, deaths: eintrag.deaths, diffDeaths });
+      result.push({ date: eintrag.datum, value: anzahl, diff, deaths: eintrag.deaths, diffDeaths });
     });
     return result;
   }
