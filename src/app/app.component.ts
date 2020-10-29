@@ -149,10 +149,10 @@ export class AppComponent implements OnInit {
       return false;
     }
 
-    // an diesem Tag sind die Daten in der Quelle kaputt
-    if (e.Date && e.Date.indexOf('2020-10-28T') === 0) {
-      return false;
-    }
+    // // an diesem Tag sind die Daten in der Quelle kaputt
+    // if (e.Date && e.Date.indexOf('2020-10-28T') === 0) {
+    //   return false;
+    // }
 
     // remove corrupt data from Canada
     if (this.selectedCountry === 'canada' && e.Date && e.Date < '2020-07-21') {
