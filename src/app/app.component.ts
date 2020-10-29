@@ -6,6 +6,7 @@ import { Country } from './country.interface';
 import { CountryDataService } from './country-data.service';
 import { ActivatedRoute } from '@angular/router';
 import { DatePipe } from '@angular/common';
+import { TreeMapModule } from '@swimlane/ngx-charts';
 
 @Component({
   selector: 'corona-root',
@@ -40,7 +41,7 @@ export class AppComponent implements OnInit {
   // ===========================================================================================
 
   hasEnoughData(): boolean {
-    return this.graphData.length > 3 && !this.isDataBroken();
+    return this.graphData.length > 3;
   }
 
   // ===========================================================================================
@@ -53,7 +54,8 @@ export class AppComponent implements OnInit {
   // ===========================================================================================
 
   private isDataBroken(): boolean {
-    return this.tableData && this.tableData.length && this.tableData[0].deaths === 0;
+    return false;
+    // return this.tableData && this.tableData.length > 0;
   }
 
   // ===========================================================================================
@@ -64,6 +66,7 @@ export class AppComponent implements OnInit {
 
     observer.subscribe(
       (data) => {
+
         this.countryDataService.writeCache(this.selectedCountry, data);
         let rawData = this.getRawData(data);
         this.graphData = this.getGraphData(rawData);
@@ -72,6 +75,7 @@ export class AppComponent implements OnInit {
         this.averageDecline = 0;
         this.days = 0;
         const anzahlTage = this.graphData.length;
+
         if (anzahlTage >= 3) {
           this.averageDecline = (this.graphData[anzahlTage - 3].diff + this.graphData[anzahlTage - 2].diff + this.graphData[anzahlTage - 1].diff) / 3;
           if (this.averageDecline < 0) {
@@ -145,13 +149,18 @@ export class AppComponent implements OnInit {
       return false;
     }
 
+    // an diesem Tag sind die Daten in der Quelle kaputt
+    if (e.Date && e.Date.indexOf('2020-10-28T') === 0) {
+      return false;
+    }
+
     // remove corrupt data from Canada
     if (this.selectedCountry === 'canada' && e.Date && e.Date < '2020-07-21') {
       return false;
     }
 
-    // weder krank noch gestorben gibt es nur in Nordkorea ;-)
-    return !!(e.Active || e.Deaths);
+    // keiner krank gibt es nur in Nordkorea ;-)
+    return !!(e.Active);
   }
 
   // ===========================================================================================
@@ -168,7 +177,7 @@ export class AppComponent implements OnInit {
       const anzahl = Math.max(0, eintrag.anzahl);
       const deaths = eintrag.deaths;
       const diff = index === 0 ? anzahl : anzahl - Math.max(0, result[index - 1].value);
-      const diffDeaths = index === 0 ? deaths : deaths - Math.max(0, result[index - 1].deaths);
+      const diffDeaths = Math.max(0, index === 0 ? deaths : deaths - Math.max(0, result[index - 1].deaths));
       result.push({ date: eintrag.datum, value: anzahl, diff, deaths: eintrag.deaths, diffDeaths });
     });
     return result;
@@ -177,7 +186,7 @@ export class AppComponent implements OnInit {
   // ===========================================================================================
 
   private hasData(eintrag: RowData): boolean {
-    return (eintrag.diff !== 0 || eintrag.deaths !== 0);
+    return !!eintrag.value || !!eintrag.diff || !!eintrag.deaths || !!eintrag.diffDeaths;
   }
 
 }
