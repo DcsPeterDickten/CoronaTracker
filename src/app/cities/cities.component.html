@@ -1,19 +1,30 @@
-<div class="table-wrapper">
-  <table class="table">
-    <thead>
-      <tr>
-        <th>Stadt</th>
-        <th>&nbsp;7-Tage-Inzidenz&nbsp;</th>
-      </tr>
-    </thead>
+<div class="wrap-collabsible">
+  <input id="collapsible" class="toggle" type="checkbox" />
+  <label for="collapsible" class="lbl-toggle">Bayerische Städte anzeigen</label>
+  <div class="collapsible-content">
+    <div class="content-inner">
+      <div class="table-wrapper">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Stadt</th>
+              <th>&nbsp;7-Tage-Inzidenz&nbsp;</th>
+            </tr>
+          </thead>
 
-    <tbody>
-      <tr *ngFor="let c of rawCityData" class="{{getClassForInzidenz(c[2])}}">
-        <td>{{ c[0] }}</td>
-        <td>{{ c[2] }}</td>
-      </tr>
-    </tbody>
-  </table>
+          <tbody>
+            <tr
+              *ngFor="let c of rawCityData"
+              class="{{ getClassForInzidenz(c[2]) }}"
+            >
+              <td>{{ c[0] }}</td>
+              <td>{{ c[2] }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
 </div>
 
 <div *ngIf="!rawCityData?.length">
