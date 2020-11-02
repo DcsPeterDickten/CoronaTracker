@@ -1,6 +1,6 @@
 <div class="wrap-collabsible">
   <input id="collapsible" class="toggle" type="checkbox" />
-  <label for="collapsible" class="lbl-toggle">Bayerische Städte anzeigen</label>
+  <label for="collapsible" class="lbl-toggle">Alle bayerischen Städte und Landkreise anzeigen</label>
   <div class="collapsible-content">
     <div class="content-inner">
       <div class="table-wrapper">
@@ -13,10 +13,7 @@
           </thead>
 
           <tbody>
-            <tr
-              *ngFor="let c of rawCityData"
-              class="{{ getClassForInzidenz(c[2]) }}"
-            >
+            <tr *ngFor="let c of rawCityData" class="{{ getClassForInzidenz(c[2]) }}">
               <td>{{ c[0] }}</td>
               <td>{{ c[2] }}</td>
             </tr>
