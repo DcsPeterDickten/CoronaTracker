@@ -18,10 +18,16 @@
   color: white;
 }
 
-.above200 {
+.below300 {
+  background-color: #370a5e;
+  color: white;
+}
+
+.above300 {
   background-color: black;
   color: white;
 }
+
 /* COLLAPSE */
 input[type="checkbox"] {
   display: none;

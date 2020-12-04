@@ -5,12 +5,12 @@ import { environment } from 'src/environments/environment';
 @Component({
   selector: 'corona-cities',
   templateUrl: './cities.component.html',
-  styleUrls: ['./cities.component.css']
+  styleUrls: ['./cities.component.css'],
 })
 export class CitiesComponent implements OnInit {
   rawCityData = [];
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   ngOnInit(): void {
     this.loadCityData();
@@ -45,12 +45,14 @@ export class CitiesComponent implements OnInit {
       return 'below200';
     }
 
-    return 'above200';
+    if (+inzidenz < 300) {
+      return 'below300';
+    }
 
+    return 'above300';
   }
 
   isInterestingCity(city: Array<string>): boolean {
-
     // const LIST_OF_CITIES = [
     //   'erlangen',
     //   'coburg',
