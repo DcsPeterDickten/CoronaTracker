@@ -37,7 +37,7 @@ registerLocaleData(localeDe, 'de-DE', localeDeExtra);
   ],
   imports: [
     BrowserModule, HttpClientModule, CommonModule, NgxChartsModule, BrowserAnimationsModule, FormsModule,
-    RouterModule.forRoot([]),
+    RouterModule.forRoot([], { relativeLinkResolution: 'legacy' }),
   ],
   providers: [
     { provide: LOCALE_ID, useValue: 'de-de' },
