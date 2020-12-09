@@ -1,7 +1,9 @@
 <div class="wrap-collabsible">
   <input id="collapsible" class="toggle" type="checkbox" />
-  <label for="collapsible" class="lbl-toggle">Alle bayerischen Städte und Landkreise anzeigen</label>
-  <div class="collapsible-content">
+  <label for="collapsible" class="lbl-toggle"
+    >Alle bayerischen Städte und Landkreise anzeigen</label
+  >
+  <div class="collapsible-content" *ngIf="rawCityData?.length">
     <div class="content-inner">
       <div class="table-wrapper">
         <table class="table">
@@ -13,7 +15,10 @@
           </thead>
 
           <tbody>
-            <tr *ngFor="let c of rawCityData" class="{{ getClassForInzidenz(c[2]) }}">
+            <tr
+              *ngFor="let c of rawCityData"
+              class="{{ getClassForInzidenz(c[2]) }}"
+            >
               <td>{{ c[0] }}</td>
               <td>{{ c[2] }}</td>
             </tr>
@@ -25,5 +30,5 @@
 </div>
 
 <div *ngIf="!rawCityData?.length">
-  Leider liefert die bayerische Datenquellen im Moment keine Stadtinformationen.
+  Leider liefert die bayerische Datenquelle im Moment keine Stadtinformationen.
 </div>

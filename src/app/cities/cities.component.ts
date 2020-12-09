@@ -53,39 +53,11 @@ export class CitiesComponent implements OnInit {
   }
 
   isInterestingCity(city: Array<string>): boolean {
-    // const LIST_OF_CITIES = [
-    //   'erlangen',
-    //   'coburg',
-    //   'bamberg',
-    //   'donau-ries',
-    //   'fürth',
-    //   'nürnberg',
-    //   '/landkreis',
-    //   'münchen'];
-
-    // let RESULT = false;
-
-    // if (!city || !city.length) {
-    //   return false;
-    // }
-
-    // return true;
-
-    return !!city && city.length > 0 && city[0] !== 'Stadt/ <br> Landkreis';
-
-    // if (+city[2] >= 30) {
-    //   return true;
-    // }
-
-    // const NAME: string = (city[0] || '').toLocaleLowerCase();
-
-    // LIST_OF_CITIES.forEach((c) => {
-    //   if (NAME.indexOf(c) >= 0) {
-    //     RESULT = true;
-    //     return;
-    //   }
-    // });
-
-    // return RESULT;
+    return (
+      !!city &&
+      city.length > 0 &&
+      city[0] !== 'Stadt/ <br> Landkreis' &&
+      city[0] !== ' ()'
+    );
   }
 }
