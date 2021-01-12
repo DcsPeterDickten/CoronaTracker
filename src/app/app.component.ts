@@ -76,8 +76,8 @@ export class AppComponent implements OnInit {
         this.days = 0;
         const anzahlTage = this.graphData.length;
 
-        if (anzahlTage >= 3) {
-          this.averageDecline = (this.graphData[anzahlTage - 3].diff + this.graphData[anzahlTage - 2].diff + this.graphData[anzahlTage - 1].diff) / 3;
+        if (anzahlTage >= 5) {
+          this.averageDecline = (this.graphData[anzahlTage - 5].diff + this.graphData[anzahlTage - 4].diff + this.graphData[anzahlTage - 3].diff + this.graphData[anzahlTage - 2].diff + this.graphData[anzahlTage - 1].diff) / 5;
           if (this.averageDecline < 0) {
             this.days = Math.round(this.graphData[anzahlTage - 1].value / Math.abs(this.averageDecline));
           }

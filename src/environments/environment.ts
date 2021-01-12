@@ -265,7 +265,7 @@ export const environment = {
     { id: 'zambia', name: 'Zambia' },
     { id: 'zimbabwe', name: 'Zimbabwe' },
   ],
-  URL: 'https://api.covid19api.com/total/country/',
+  URL: 'http://api.covid19api.com/total/country/',
   CITY_URL:
     'https://static.dwcdn.net/data/xB5Pf.csv?v=4247236497862139476129347861978234617892346',
 };
