@@ -10,10 +10,20 @@ import { environment } from 'src/environments/environment';
 export class CitiesComponent implements OnInit {
   rawCityData = [];
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   ngOnInit(): void {
     this.loadCityData();
+
+    // if (!String.prototype.startsWith) {
+    //   Object.defineProperty(String.prototype, 'startsWith', {
+    //     value: function (search, rawPos) {
+    //       var pos = rawPos > 0 ? rawPos | 0 : 0;
+    //       return this.substring(pos, pos + search.length) === search;
+    //     }
+    //   });
+    // }
+
   }
 
   loadCityData(): void {
@@ -25,8 +35,19 @@ export class CitiesComponent implements OnInit {
         this.rawCityData = data
           .split('\r\n')
           .map((zeile) => zeile.split(','))
-          .filter(this.isInterestingCity);
+          .filter(this.isInterestingCity)
+          .map(this.cleanCityData);
       });
+  }
+
+  cleanCityData(cityData: any) {
+
+    let count = (cityData[2] || '') as string;
+    if (count[0] === '"') {
+      cityData[2] = count.substring(1, 100);
+    }
+
+    return cityData;
   }
 
   getClassForInzidenz(inzidenz: number) {
