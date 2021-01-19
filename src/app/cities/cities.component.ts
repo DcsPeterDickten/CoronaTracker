@@ -36,12 +36,18 @@ export class CitiesComponent implements OnInit {
           .split('\r\n')
           .map((zeile) => zeile.split(','))
           .filter(this.isInterestingCity)
-          .map(this.cleanCityData);
+          .map(this.cleanCityData)
+          .sort(this.sortCities)
       });
   }
 
-  cleanCityData(cityData: any) {
+  sortCities(a, b) {
+    const nameA = a[0] || '';
+    const nameB = b[0] || '';
+    return nameA.localeCompare(nameB);
+  }
 
+  cleanCityData(cityData: any) {
     let count = (cityData[2] || '') as string;
     if (count[0] === '"') {
       cityData[2] = count.substring(1, 100);
@@ -78,6 +84,7 @@ export class CitiesComponent implements OnInit {
       !!city &&
       city.length > 0 &&
       city[0] !== 'Stadt/ <br> Landkreis' &&
+      city[0] !== 'Stadt/Landkreis' &&
       city[0] !== ' ()'
     );
   }
