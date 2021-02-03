@@ -12,8 +12,8 @@
   <corona-cities *ngIf="selectedCountry === 'germany'">
   </corona-cities>
 
-  <corona-prognose [dataIsBroken]="!hasEnoughData()" [noOfRecords]="graphData.length" [daysUntilEndOfCrisis]="days">
-  </corona-prognose>
+  <!-- <corona-prognose *ngIf="false" [dataIsBroken]="!hasEnoughData()" [noOfRecords]="graphData.length" [daysUntilEndOfCrisis]="days">
+  </corona-prognose> -->
 
   <corona-chart [data]="graphData" *ngIf="hasEnoughData()">
   </corona-chart>
