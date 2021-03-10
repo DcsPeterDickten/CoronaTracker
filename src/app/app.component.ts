@@ -144,6 +144,10 @@ export class AppComponent implements OnInit {
       return false;
     }
 
+    if (e.Date && e.Date.indexOf('2021-03-08T') === 0) {
+      return false;
+    }
+
     // an diesem Tag sind die Daten in der Quelle kaputt
     if (e.Date && e.Date.indexOf('2020-07-08T') === 0) {
       return false;
